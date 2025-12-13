@@ -1,0 +1,9 @@
+=== MEMBER 4 – Merge + Feature Engineering Report ===
+
+Weather rows: 4794
+Traffic rows: 4813
+Merged rows (exact match): 586
+Missing from weather: 4208
+Missing from traffic: 4227
+Merge rate (%): 12.22
+Final dataset with features: 586

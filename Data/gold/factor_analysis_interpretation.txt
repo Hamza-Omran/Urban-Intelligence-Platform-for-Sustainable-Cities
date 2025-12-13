@@ -1,0 +1,82 @@
+======================================================================
+FACTOR ANALYSIS INTERPRETATION REPORT
+======================================================================
+
+Analysis Date: December 2024
+Member: 6 - Factor Analysis & Final Integration
+Number of Factors: 3
+
+VARIANCE EXPLAINED:
+  Total variance captured: 42.48%
+
+LATENT FACTORS IDENTIFIED:
+
+Factor1: Weather Severity Factor
+  Description: Represents adverse weather conditions including rain, wind, and reduced visibility
+  Key Features:
+    1. temperature_c            : -0.5466
+    2. avg_speed_kmh            :  0.1943
+    3. wind_speed_kmh           :  0.1322
+    4. vehicle_count            :  0.1025
+    5. accident_count           :  0.0787
+
+Factor2: Traffic Flow Stress Factor
+  Description: Captures traffic congestion levels and flow dynamics
+  Key Features:
+    1. avg_speed_kmh            :  0.3345
+    2. visibility_m             :  0.2432
+    3. vehicle_count            :  0.1764
+    4. wind_speed_kmh           :  0.1700
+    5. temperature_c            :  0.1232
+
+Factor3: Weather Severity Factor
+  Description: Represents adverse weather conditions including rain, wind, and reduced visibility
+  Key Features:
+    1. wind_speed_kmh           :  0.2634
+    2. rain_mm                  :  0.2171
+    3. humidity                 :  0.1612
+    4. avg_speed_kmh            : -0.1585
+    5. accident_count           :  0.0856
+
+KEY INSIGHTS:
+
+1. Weather Severity Impact:
+   Weather conditions (rain, wind, visibility) cluster together,
+   indicating a unified 'weather severity' dimension affecting traffic.
+
+2. Traffic Flow Dynamics:
+   Vehicle count and speed form a distinct factor representing
+   congestion and flow characteristics independent of weather.
+
+3. Accident Risk Factors:
+   Accident occurrences correlate with specific combinations of
+   weather and traffic conditions, forming a risk assessment dimension.
+
+RECOMMENDATIONS FOR URBAN TRAFFIC PLANNING:
+
+1. Integrated Weather Monitoring:
+   Deploy unified weather severity indices for traffic management
+   rather than monitoring individual weather variables separately.
+
+2. Flow-Based Interventions:
+   Design traffic control strategies based on flow stress factors
+   (vehicle density and speed patterns) as distinct from weather impacts.
+
+3. Risk-Targeted Safety Measures:
+   Implement accident prevention protocols triggered by combined
+   factor scores rather than single-variable thresholds.
+
+4. Predictive Modeling:
+   Use factor scores as inputs for traffic prediction models
+   to reduce dimensionality and improve computational efficiency.
+
+======================================================================
+FILES GENERATED:
+  - factor_loadings.csv
+  - factor_scores.csv
+  - factor_analysis_interpretation.txt
+  - scree_plot.png
+  - factor_loadings_heatmap.png
+  - factor_scores_distribution.png
+  - factor_biplot.png
+======================================================================

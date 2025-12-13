@@ -1,0 +1,51 @@
+HDFS Data Transfer Log
+============================================================
+
+[2025-12-11 22:21:26] ============================================================
+[2025-12-11 22:21:26] HDFS Integration - Data Transfer Pipeline
+[2025-12-11 22:21:26] ============================================================
+[2025-12-11 22:21:26] 
+Checking HDFS status...
+[2025-12-11 22:21:27] HDFS is running
+[2025-12-11 22:21:27] Setting up HDFS directory structure...
+[2025-12-11 22:21:31] HDFS directory structure created
+[2025-12-11 22:21:31] Created local temp directory: ./temp_hdfs
+[2025-12-11 22:21:31] 
+============================================================
+[2025-12-11 22:21:31] Transferring Weather Data
+[2025-12-11 22:21:31] ============================================================
+[2025-12-11 22:21:31] Downloading weather_cleaned.parquet from MinIO silver bucket...
+[2025-12-11 22:21:31] Downloaded: weather_cleaned.parquet (196,296 bytes)
+[2025-12-11 22:21:31] Transferring weather data to HDFS...
+[2025-12-11 22:21:31] Local file size: 196,296 bytes
+[2025-12-11 22:21:35] HDFS file size: 196,296 bytes
+[2025-12-11 22:21:35] Transfer verified: weather data
+[2025-12-11 22:21:38] Weather data transfer complete
+[2025-12-11 22:21:38] 
+============================================================
+[2025-12-11 22:21:38] Transferring Traffic Data
+[2025-12-11 22:21:38] ============================================================
+[2025-12-11 22:21:38] Downloading traffic_cleaned.parquet from MinIO silver bucket...
+[2025-12-11 22:21:38] Downloaded: traffic_cleaned.parquet (154,296 bytes)
+[2025-12-11 22:21:38] Transferring traffic data to HDFS...
+[2025-12-11 22:21:38] Local file size: 154,296 bytes
+[2025-12-11 22:21:41] HDFS file size: 154,296 bytes
+[2025-12-11 22:21:41] Transfer verified: traffic data
+[2025-12-11 22:21:44] Traffic data transfer complete
+[2025-12-11 22:21:44] 
+============================================================
+[2025-12-11 22:21:44] Verifying HDFS Data
+[2025-12-11 22:21:44] ============================================================
+[2025-12-11 22:21:44] 
+Weather directory (/user/bigdata/weather):
+[2025-12-11 22:21:47]   - weather_cleaned.parquet: 196,296 bytes
+[2025-12-11 22:21:47] 
+Traffic directory (/user/bigdata/traffic):
+[2025-12-11 22:21:49]   - traffic_cleaned.parquet: 154,296 bytes
+[2025-12-11 22:21:49] 
+Cleaned directory (/user/bigdata/cleaned):
+[2025-12-11 22:21:52]   - traffic_cleaned.parquet: 154,296 bytes
+[2025-12-11 22:21:53]   - weather_cleaned.parquet: 196,296 bytes
+[2025-12-11 22:21:53] 
+Cleaning up temporary files...
+[2025-12-11 22:21:53] Temporary files cleaned up
