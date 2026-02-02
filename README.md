@@ -4,8 +4,6 @@ Big Data and Network Analytics for Sustainable City Systems
 
 A data-driven urban analytics platform that processes large-scale city data, applies network analysis and simulations, and visualizes systemic urban behavior to support sustainable urban planning decisions.
 
-Version 2.0 | Python 3.8+ | MIT License
-
 ## Overview
 
 The Urban Intelligence Platform demonstrates a complete data analytics pipeline for sustainable cities, processing large-scale urban data through Big Data infrastructure, applying network analysis to reveal systemic patterns, and visualizing insights to support policy decisions.
@@ -254,10 +252,3 @@ Top-K Benefits:
 - Interpretable: each area linked to its most similar neighbors
 
 Similar strategies used in protein interaction networks, social network analysis, and recommendation systems.
-
-
-## Contact
-
-For questions or collaboration opportunities contact via GitHub or email.
-
-Built for AI for Sustainable Societies - Transforming Urban Data into Climate-Adaptive Decisions
