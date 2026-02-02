@@ -14,7 +14,14 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-st.markdown(, unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+    .main { padding-top: 2rem; }
+    .stMetric { background-color: #f0f2f6; padding: 1rem; border-radius: 0.5rem; }
+    h1, h2, h3 { color: #1f77b4; }
+</style>
+""", unsafe_allow_html=True)
 @st.cache_data
 def load_cleaned_data():
     try:
@@ -59,7 +66,8 @@ def load_network_analysis():
     except Exception as e:
         st.error(f"Error loading network analysis: {e}")
         return None, None
-st.markdown(, unsafe_allow_html=True)
+
+st.markdown("# Weather Impact on Urban Traffic - Analytics Dashboard")
 with st.sidebar:
     st.image("Assets/fcds_logo.jpg", use_container_width=True)
     st.markdown("###  Navigation")
@@ -69,18 +77,6 @@ with st.sidebar:
          " Monte Carlo Simulation", " Factor Analysis", " Network Analysis", " Recommendations"],
         label_visibility="collapsed"
     )
-    st.markdown("---")
-    st.markdown("###  Team Members")
-    team_members = [
-        "Member 1: Infrastructure",
-        "Member 2: Data Cleaning",
-        "Member 3: HDFS Integration",
-        "Member 4: Data Merging",
-        "Member 5: Monte Carlo Simulation",
-        "Member 6: Factor Analysis"
-    ]
-    for member in team_members:
-        st.markdown(f"- {member}")
 if selected_page == " Overview":
     st.header(" Project Overview")
     weather, traffic = load_cleaned_data()
@@ -151,12 +147,14 @@ if selected_page == " Overview":
     )
     st.plotly_chart(fig, use_container_width=True)
     st.markdown("---")
-    st.subheader(" Key Findings")
+    st.subheader("Key Findings")
     col1, col2 = st.columns(2)
     with col1:
-        st.markdown()
+        st.markdown("**Weather Impact**: Strong winds cause 72.89% congestion risk, heavy rain affects 55.36% of scenarios")
+        st.markdown("**Traffic Patterns**: Peak vulnerability during morning (7-9 AM) and evening (5-7 PM) rush hours")
     with col2:
-        st.markdown()
+        st.markdown("**Network Structure**: 3 communities detected with modularity 0.215 showing significant systemic patterns")
+        st.markdown("**Top Influential Areas**: Westminster, Hammersmith, and Camden lead in PageRank centrality")
 elif selected_page == " Data Cleaning":
     st.header(" Data Cleaning Results")
     weather, traffic = load_cleaned_data()
@@ -254,7 +252,7 @@ elif selected_page == " Data Merging":
                 color_discrete_sequence=['#3b82f6']
             )
             st.plotly_chart(fig, use_container_width=True)
-            st.markdown()
+            st.markdown("")
         with col2:
             st.markdown("#### Traffic Intensity Score")
             fig = px.histogram(
@@ -266,7 +264,7 @@ elif selected_page == " Data Merging":
                 color_discrete_sequence=['#ef4444']
             )
             st.plotly_chart(fig, use_container_width=True)
-            st.markdown()
+            st.markdown("")
         st.markdown("---")
         st.subheader(" Temporal Patterns")
         if 'hour' in merged.columns:
@@ -422,7 +420,7 @@ elif selected_page == " Factor Analysis":
         with tab1:
             col1, col2 = st.columns([1, 2])
             with col1:
-                st.markdown()
+                st.markdown("")
             with col2:
                 factor1_data = factor_loadings['Factor1'].sort_values(key=abs, ascending=False)
                 fig = go.Figure(go.Bar(
@@ -444,7 +442,7 @@ elif selected_page == " Factor Analysis":
         with tab2:
             col1, col2 = st.columns([1, 2])
             with col1:
-                st.markdown()
+                st.markdown("")
             with col2:
                 factor2_data = factor_loadings['Factor2'].sort_values(key=abs, ascending=False)
                 fig = go.Figure(go.Bar(
@@ -466,7 +464,7 @@ elif selected_page == " Factor Analysis":
         with tab3:
             col1, col2 = st.columns([1, 2])
             with col1:
-                st.markdown()
+                st.markdown("")
             with col2:
                 factor3_data = factor_loadings['Factor3'].sort_values(key=abs, ascending=False)
                 fig = go.Figure(go.Bar(
@@ -693,38 +691,63 @@ elif selected_page == " Network Analysis":
         st.subheader(" Network Insights")
         col1, col2 = st.columns(2)
         with col1:
-            st.markdown()
+            st.markdown("")
         with col2:
-            st.markdown()
+            st.markdown("")
+        st.markdown("**Graph Model**: Each borough is a node, connected by top-2 similarity strategy")
+        st.markdown("**Edge Weight**: 60% traffic correlation + 40% weather correlation (Pearson coefficients)")
+        st.markdown("**Community Structure**: Greedy modularity optimization identified 3 stable clusters")
+        
+        st.subheader("Practical Applications")
+        st.markdown("**Intervention Priority**: Target high-PageRank areas for maximum systemic impact")
+        st.markdown("**Bottleneck Identification**: Use betweenness centrality to find critical traffic control points")
+        st.markdown("**Coordinated Policies**: Implement strategies within communities for consistency")
+        
+        st.subheader("Interpretation Guide")
+        st.markdown("**Important Note**: High PageRank indicates systemic influence, not direct congestion severity")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("**Edges Represent**: Statistical similarity in traffic-weather response patterns")
+        with col2:
+            st.markdown("**Communities Show**: Areas with correlated urban behavior under similar conditions")
+        st.markdown("**Network Density**: 0.321 indicates well-connected systemic behavior")
+        st.markdown("**Modularity**: 0.215 shows significant community structure")
+        st.markdown("**Applications**: Guides resource allocation and policy coordination across urban zones")
 elif selected_page == " Recommendations":
     st.header(" Strategic Recommendations for Urban Traffic Management")
-    st.markdown()
+    st.markdown("This section outlines actionable strategies derived from the analysis to enhance urban traffic management and resilience.")
     st.markdown("---")
     st.subheader(" Immediate Operational Actions")
     col1, col2 = st.columns(2)
     with col1:
-        st.markdown()
-        st.markdown()
-        st.markdown()
+        st.markdown("### **Dynamic Traffic Control**")
+        st.markdown("- Implement adaptive traffic signal systems that respond to real-time traffic flow and incident data.")
+        st.markdown("- Utilize variable message signs (VMS) to provide real-time information on congestion, accidents, and alternative routes.")
+        st.markdown("- Deploy temporary traffic management measures (e.g., contraflow lanes) during peak hours or major events.")
     with col2:
-        st.markdown()
-        st.markdown()
-        st.markdown()
+        st.markdown("### **Incident Management**")
+        st.markdown("- Establish rapid response teams for accident clearance and emergency road repairs.")
+        st.markdown("- Integrate data from police, ambulance, and fire services for coordinated incident response.")
+        st.markdown("- Develop clear communication protocols to inform the public about disruptions and expected delays.")
     st.markdown("---")
     st.subheader(" Policy Recommendations")
-    st.markdown()
-    st.markdown()
-    st.markdown()
+    st.markdown("### **Sustainable Urban Mobility Plan (SUMP)**")
+    st.markdown("- Promote public transportation usage through improved services, integrated ticketing, and dedicated lanes.")
+    st.markdown("- Invest in cycling and pedestrian infrastructure to encourage active travel modes.")
+    st.markdown("- Implement congestion pricing or low-emission zones to reduce private vehicle dependency in critical areas.")
     st.markdown("---")
     st.subheader(" Factor-Based Monitoring System")
-    st.markdown()
+    st.markdown("Develop a real-time dashboard integrating key factors (traffic intensity, weather severity, accident rates, air quality) to provide a holistic view of urban mobility.")
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.markdown()
+        st.markdown("### **Predictive Analytics**")
+        st.markdown("- Use machine learning models to forecast congestion and accident hotspots based on historical data and real-time factor inputs.")
     with col2:
-        st.markdown()
+        st.markdown("### **Early Warning System**")
+        st.markdown("- Set up automated alerts for critical thresholds in traffic, weather, or air quality to trigger pre-emptive interventions.")
     with col3:
-        st.markdown()
+        st.markdown("### **Performance Tracking**")
+        st.markdown("- Monitor the effectiveness of implemented strategies against predefined KPIs (e.g., average travel time, accident reduction, public transport ridership).")
     st.markdown("---")
     st.subheader(" Implementation Roadmap")
     roadmap_data = pd.DataFrame({
@@ -751,10 +774,11 @@ elif selected_page == " Recommendations":
         })
         st.dataframe(outcomes_data, use_container_width=True)
     with col2:
-        st.markdown()
+        st.markdown("")
     st.markdown("---")
-    st.subheader(" Key Takeaways")
-    st.success()
-    st.info()
+    st.subheader("Key Takeaways")
+    st.success("Network analysis reveals systemic urban behavior patterns for evidence-based policy making")
+    st.info("This platform demonstrates MSc-level systems thinking for sustainable urban planning")
+
 st.markdown("---")
-st.markdown(, unsafe_allow_html=True)
+st.markdown("Built for AI for Sustainable Societies - Big Data Analytics Project")
