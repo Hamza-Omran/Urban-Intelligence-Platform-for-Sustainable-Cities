@@ -1,18 +1,3 @@
-"""
-Professional Interactive Dashboard for Weather Impact on Urban Traffic Analysis
-Big Data Final Project - Fourth Year Computer Science
-
-This dashboard integrates all 6 phases of the project:
-- Phase 1: Infrastructure & Data Generation
-- Phase 2: Data Cleaning
-- Phase 3: HDFS Integration
-- Phase 4: Data Merging & Feature Engineering
-- Phase 5: Monte Carlo Simulation
-- Phase 6: Factor Analysis
-
-Run with: streamlit run dashboard.py
-"""
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -23,67 +8,15 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from datetime import datetime
 import os
-
-# ============================================================================
-# PAGE CONFIGURATION
-# ============================================================================
 st.set_page_config(
     page_title="Weather Impact on Traffic - Dashboard",
-    page_icon="🌦️",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
-# Custom CSS for professional styling
-st.markdown("""
-    <style>
-    .main {
-        background-color: #f8f9fa;
-    }
-    .stMetric {
-        background-color: white;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .css-1d391kg {
-        padding-top: 2rem;
-    }
-    h1 {
-        color: #1e3a8a;
-        font-weight: 700;
-    }
-    h2 {
-        color: #1e40af;
-        font-weight: 600;
-        margin-top: 2rem;
-    }
-    h3 {
-        color: #2563eb;
-        font-weight: 500;
-    }
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
-    }
-    .stTabs [data-baseweb="tab"] {
-        background-color: white;
-        border-radius: 8px;
-        padding: 10px 20px;
-        font-weight: 500;
-    }
-    .stTabs [aria-selected="true"] {
-        background-color: #3b82f6;
-        color: white;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-# ============================================================================
-# DATA LOADING FUNCTIONS
-# ============================================================================
+st.markdown(, unsafe_allow_html=True)
 @st.cache_data
 def load_cleaned_data():
-    """Load cleaned weather and traffic datasets"""
     try:
         weather = pd.read_parquet('Data/weather_cleaned.parquet')
         traffic = pd.read_parquet('Data/traffic_cleaned.parquet')
@@ -91,20 +24,16 @@ def load_cleaned_data():
     except Exception as e:
         st.error(f"Error loading cleaned data: {e}")
         return None, None
-
 @st.cache_data
 def load_merged_data():
-    """Load merged dataset with features"""
     try:
         merged = pd.read_parquet('output/merged_with_features.parquet')
         return merged
     except Exception as e:
         st.error(f"Error loading merged data: {e}")
         return None
-
 @st.cache_data
 def load_simulation_results():
-    """Load Monte Carlo simulation results"""
     try:
         sim_results = pd.read_csv('Data/gold/simulation_results.csv')
         scenario_analysis = pd.read_csv('Data/gold/scenario_analysis.csv')
@@ -112,10 +41,8 @@ def load_simulation_results():
     except Exception as e:
         st.error(f"Error loading simulation results: {e}")
         return None, None
-
 @st.cache_data
 def load_factor_analysis():
-    """Load factor analysis results"""
     try:
         factor_loadings = pd.read_csv('Data/gold/factor_loadings.csv', index_col=0)
         factor_scores = pd.read_csv('Data/gold/factor_scores.csv')
@@ -123,41 +50,27 @@ def load_factor_analysis():
     except Exception as e:
         st.error(f"Error loading factor analysis: {e}")
         return None, None
-
-# ============================================================================
-# HEADER
-# ============================================================================
-st.markdown("""
-    <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-                padding: 2rem; border-radius: 10px; margin-bottom: 2rem;'>
-        <h1 style='color: white; text-align: center; margin: 0;'>
-            🌦️ Weather Impact on Urban Traffic Analysis
-        </h1>
-        <p style='color: white; text-align: center; margin-top: 0.5rem; font-size: 1.2rem;'>
-            Big Data Final Project - Fourth Year Computer Science
-        </p>
-        <p style='color: rgba(255,255,255,0.9); text-align: center; margin: 0;'>
-            London Metropolitan Area • 10,000 Monte Carlo Simulations • 6-Phase Data Pipeline
-        </p>
-    </div>
-""", unsafe_allow_html=True)
-
-# ============================================================================
-# SIDEBAR
-# ============================================================================
+@st.cache_data
+def load_network_analysis():
+    try:
+        network_metrics = pd.read_csv('Data/gold/network_metrics.csv')
+        edge_weights = pd.read_csv('Data/gold/edge_weights.csv')
+        return network_metrics, edge_weights
+    except Exception as e:
+        st.error(f"Error loading network analysis: {e}")
+        return None, None
+st.markdown(, unsafe_allow_html=True)
 with st.sidebar:
-    st.image("https://via.placeholder.com/300x100/667eea/ffffff?text=Big+Data+Project", use_container_width=True)
-    
-    st.markdown("### 📊 Navigation")
+    st.image("Assets/fcds_logo.jpg", use_container_width=True)
+    st.markdown("###  Navigation")
     selected_page = st.radio(
         "",
-        ["🏠 Overview", "🧹 Data Cleaning", "🔄 Data Merging", 
-         "🎲 Monte Carlo Simulation", "🔬 Factor Analysis", "💡 Recommendations"],
+        [" Overview", " Data Cleaning", " Data Merging", 
+         " Monte Carlo Simulation", " Factor Analysis", " Network Analysis", " Recommendations"],
         label_visibility="collapsed"
     )
-    
     st.markdown("---")
-    st.markdown("### 👥 Team Members")
+    st.markdown("###  Team Members")
     team_members = [
         "Member 1: Infrastructure",
         "Member 2: Data Cleaning",
@@ -168,30 +81,13 @@ with st.sidebar:
     ]
     for member in team_members:
         st.markdown(f"- {member}")
-    
-    st.markdown("---")
-    st.markdown("### 📅 Project Info")
-    st.info(f"**Deadline:** December 14, 2024\n\n**Institution:** FCDS - Semester 7")
-
-# ============================================================================
-# MAIN CONTENT
-# ============================================================================
-
-# ----------------------------------------------------------------------------
-# OVERVIEW PAGE
-# ----------------------------------------------------------------------------
-if selected_page == "🏠 Overview":
-    st.header("📈 Project Overview")
-    
-    # Load all data
+if selected_page == " Overview":
+    st.header(" Project Overview")
     weather, traffic = load_cleaned_data()
     merged = load_merged_data()
     sim_results, scenario_analysis = load_simulation_results()
     factor_loadings, factor_scores = load_factor_analysis()
-    
-    # Key Metrics
     col1, col2, col3, col4 = st.columns(4)
-    
     with col1:
         if sim_results is not None:
             avg_congestion = sim_results['congestion_probability'].mean() * 100
@@ -201,7 +97,6 @@ if selected_page == "🏠 Overview":
                 delta=f"+{(avg_congestion - 30):.1f}% vs baseline",
                 delta_color="inverse"
             )
-    
     with col2:
         if sim_results is not None:
             avg_accident = sim_results['accident_probability'].mean() * 100
@@ -211,7 +106,6 @@ if selected_page == "🏠 Overview":
                 delta=f"+{(avg_accident - 5):.1f}% vs baseline",
                 delta_color="inverse"
             )
-    
     with col3:
         if sim_results is not None:
             st.metric(
@@ -219,28 +113,22 @@ if selected_page == "🏠 Overview":
                 f"{len(sim_results):,}",
                 delta="Monte Carlo iterations"
             )
-    
     with col4:
         st.metric(
             "Variance Explained",
             "42.48%",
             delta="by 3 factors"
         )
-    
     st.markdown("---")
-    
-    # Pipeline Progress
-    st.subheader("🔄 Data Pipeline Progress")
-    
+    st.subheader(" Data Pipeline Progress")
     pipeline_data = pd.DataFrame({
         'Stage': ['Bronze Layer', 'Data Cleaning', 'HDFS Transfer', 'Data Merging', 
                   'Monte Carlo', 'Factor Analysis'],
         'Records': [5000, 4794, 4794, 586, 10000, 10000],
         'Member': [1, 2, 3, 4, 5, 6],
-        'Status': ['✅ Complete', '✅ Complete', '✅ Complete', '✅ Complete', 
-                   '✅ Complete', '✅ Complete']
+        'Status': [' Complete', ' Complete', ' Complete', ' Complete', 
+                   ' Complete', ' Complete']
     })
-    
     fig = go.Figure()
     fig.add_trace(go.Bar(
         x=pipeline_data['Stage'],
@@ -254,7 +142,6 @@ if selected_page == "🏠 Overview":
         ),
         hovertemplate='<b>%{x}</b><br>Records: %{y:,}<extra></extra>'
     ))
-    
     fig.update_layout(
         title="Data Pipeline Stages",
         xaxis_title="Stage",
@@ -262,88 +149,49 @@ if selected_page == "🏠 Overview":
         height=400,
         template="plotly_white"
     )
-    
     st.plotly_chart(fig, use_container_width=True)
-    
-    # Quick Insights
     st.markdown("---")
-    st.subheader("🎯 Key Findings")
-    
+    st.subheader(" Key Findings")
     col1, col2 = st.columns(2)
-    
     with col1:
-        st.markdown("""
-        **Weather Impact:**
-        - Strong winds show highest congestion risk (72.89%)
-        - Heavy rain affects 55.36% of simulations
-        - Combined weather effects occur in 64.8% of cases
-        - Temperature has independent effect on traffic (Factor 1: -0.547)
-        """)
-    
+        st.markdown()
     with col2:
-        st.markdown("""
-        **Traffic Patterns:**
-        - Morning peak (7-9 AM) shows elevated risk across all areas
-        - Evening rush (5-7 PM) demonstrates maximum vulnerability
-        - Chelsea and Hackney show consistently high congestion
-        - Accident risk increases 5.75x under adverse weather
-        """)
-
-# ----------------------------------------------------------------------------
-# DATA CLEANING PAGE
-# ----------------------------------------------------------------------------
-elif selected_page == "🧹 Data Cleaning":
-    st.header("🧹 Data Cleaning Results")
-    
+        st.markdown()
+elif selected_page == " Data Cleaning":
+    st.header(" Data Cleaning Results")
     weather, traffic = load_cleaned_data()
-    
     if weather is not None and traffic is not None:
-        # Cleaning Summary
-        st.subheader("📊 Cleaning Summary")
-        
+        st.subheader(" Cleaning Summary")
         col1, col2 = st.columns(2)
-        
         with col1:
             st.markdown("### Weather Dataset")
             st.metric("Records After Cleaning", f"{len(weather):,}")
             st.metric("Null Values", "0")
             st.metric("Duplicates Removed", "50")
             st.metric("Outliers Handled", "Yes")
-        
         with col2:
             st.markdown("### Traffic Dataset")
             st.metric("Records After Cleaning", f"{len(traffic):,}")
             st.metric("Null Values", "0")
             st.metric("Duplicates Removed", "40")
             st.metric("Outliers Handled", "Yes")
-        
         st.markdown("---")
-        
-        # Data Quality Tabs
         tab1, tab2 = st.tabs(["Weather Data", "Traffic Data"])
-        
         with tab1:
             st.subheader("Weather Data Overview")
-            
-            # Basic info
             col1, col2 = st.columns(2)
             with col1:
                 st.write("**First 10 rows:**")
                 st.dataframe(weather.head(10), use_container_width=True)
-            
             with col2:
                 st.write("**Statistical Summary:**")
                 st.dataframe(weather.describe(), use_container_width=True)
-            
-            # Distribution plots
             st.markdown("#### Variable Distributions")
-            
             numeric_cols = ['temperature_c', 'humidity', 'rain_mm', 'wind_speed_kmh']
             fig = make_subplots(
                 rows=2, cols=2,
                 subplot_titles=numeric_cols
             )
-            
             for idx, col in enumerate(numeric_cols):
                 row = idx // 2 + 1
                 col_pos = idx % 2 + 1
@@ -351,27 +199,19 @@ elif selected_page == "🧹 Data Cleaning":
                     go.Histogram(x=weather[col], name=col, showlegend=False),
                     row=row, col=col_pos
                 )
-            
             fig.update_layout(height=600, title_text="Weather Variables Distribution")
             st.plotly_chart(fig, use_container_width=True)
-        
         with tab2:
             st.subheader("Traffic Data Overview")
-            
-            # Basic info
             col1, col2 = st.columns(2)
             with col1:
                 st.write("**First 10 rows:**")
                 st.dataframe(traffic.head(10), use_container_width=True)
-            
             with col2:
                 st.write("**Statistical Summary:**")
                 st.dataframe(traffic.describe(), use_container_width=True)
-            
-            # Congestion Analysis
             st.markdown("#### Congestion Level Distribution")
             congestion_counts = traffic['congestion_level'].value_counts()
-            
             fig = go.Figure(data=[
                 go.Pie(
                     labels=congestion_counts.index,
@@ -382,21 +222,12 @@ elif selected_page == "🧹 Data Cleaning":
             ])
             fig.update_layout(title="Congestion Levels in Dataset")
             st.plotly_chart(fig, use_container_width=True)
-
-# ----------------------------------------------------------------------------
-# DATA MERGING PAGE
-# ----------------------------------------------------------------------------
-elif selected_page == "🔄 Data Merging":
-    st.header("🔄 Data Merging & Feature Engineering")
-    
+elif selected_page == " Data Merging":
+    st.header(" Data Merging & Feature Engineering")
     merged = load_merged_data()
-    
     if merged is not None:
-        # Merge Statistics
-        st.subheader("📊 Merge Results")
-        
+        st.subheader(" Merge Results")
         col1, col2, col3, col4 = st.columns(4)
-        
         with col1:
             st.metric("Weather Records", "4,794")
         with col2:
@@ -406,20 +237,12 @@ elif selected_page == "🔄 Data Merging":
         with col4:
             merge_rate = (len(merged) / 4794) * 100
             st.metric("Merge Rate", f"{merge_rate:.2f}%")
-        
         st.markdown("---")
-        
-        # Merged Dataset Preview
-        st.subheader("🔍 Merged Dataset Preview")
+        st.subheader(" Merged Dataset Preview")
         st.dataframe(merged.head(20), use_container_width=True)
-        
         st.markdown("---")
-        
-        # Feature Engineering Results
-        st.subheader("⚙️ Engineered Features")
-        
+        st.subheader(" Engineered Features")
         col1, col2 = st.columns(2)
-        
         with col1:
             st.markdown("#### Weather Severity Index")
             fig = px.histogram(
@@ -431,17 +254,7 @@ elif selected_page == "🔄 Data Merging":
                 color_discrete_sequence=['#3b82f6']
             )
             st.plotly_chart(fig, use_container_width=True)
-            
-            st.markdown("""
-            **Formula:**
-            ```
-            0.30 × |temp - 15°C| +
-            0.30 × rain_mm +
-            0.25 × wind_speed +
-            0.15 × (1/visibility)
-            ```
-            """)
-        
+            st.markdown()
         with col2:
             st.markdown("#### Traffic Intensity Score")
             fig = px.histogram(
@@ -453,27 +266,14 @@ elif selected_page == "🔄 Data Merging":
                 color_discrete_sequence=['#ef4444']
             )
             st.plotly_chart(fig, use_container_width=True)
-            
-            st.markdown("""
-            **Formula:**
-            ```
-            0.40 × vehicle_count +
-            0.35 × (1/avg_speed) +
-            0.25 × accident_count
-            ```
-            """)
-        
+            st.markdown()
         st.markdown("---")
-        
-        # Time-based Features
-        st.subheader("🕐 Temporal Patterns")
-        
+        st.subheader(" Temporal Patterns")
         if 'hour' in merged.columns:
             hourly_avg = merged.groupby('hour').agg({
                 'weather_severity_index': 'mean',
                 'traffic_intensity_score': 'mean'
             }).reset_index()
-            
             fig = go.Figure()
             fig.add_trace(go.Scatter(
                 x=hourly_avg['hour'],
@@ -488,7 +288,6 @@ elif selected_page == "🔄 Data Merging":
                 line=dict(color='#ef4444', width=3),
                 yaxis='y2'
             ))
-            
             fig.update_layout(
                 title="Average Severity by Hour of Day",
                 xaxis_title="Hour of Day",
@@ -501,23 +300,13 @@ elif selected_page == "🔄 Data Merging":
                 height=400,
                 hovermode='x unified'
             )
-            
             st.plotly_chart(fig, use_container_width=True)
-
-# ----------------------------------------------------------------------------
-# MONTE CARLO SIMULATION PAGE
-# ----------------------------------------------------------------------------
-elif selected_page == "🎲 Monte Carlo Simulation":
-    st.header("🎲 Monte Carlo Simulation Results")
-    
+elif selected_page == " Monte Carlo Simulation":
+    st.header(" Monte Carlo Simulation Results")
     sim_results, scenario_analysis = load_simulation_results()
-    
     if sim_results is not None and scenario_analysis is not None:
-        # Simulation Overview
-        st.subheader("📊 Simulation Overview")
-        
+        st.subheader(" Simulation Overview")
         col1, col2, col3, col4 = st.columns(4)
-        
         with col1:
             st.metric("Total Iterations", f"{len(sim_results):,}")
         with col2:
@@ -529,14 +318,9 @@ elif selected_page == "🎲 Monte Carlo Simulation":
         with col4:
             scenarios_active = sim_results[sim_results['scenario_count'] > 0].shape[0]
             st.metric("Scenarios Active", f"{scenarios_active:,}")
-        
         st.markdown("---")
-        
-        # Probability Distributions
-        st.subheader("📈 Probability Distributions")
-        
+        st.subheader(" Probability Distributions")
         col1, col2 = st.columns(2)
-        
         with col1:
             fig = px.histogram(
                 sim_results,
@@ -553,7 +337,6 @@ elif selected_page == "🎲 Monte Carlo Simulation":
                 annotation_text=f"Mean: {sim_results['congestion_probability'].mean():.2%}"
             )
             st.plotly_chart(fig, use_container_width=True)
-        
         with col2:
             fig = px.histogram(
                 sim_results,
@@ -570,19 +353,13 @@ elif selected_page == "🎲 Monte Carlo Simulation":
                 annotation_text=f"Mean: {sim_results['accident_probability'].mean():.2%}"
             )
             st.plotly_chart(fig, use_container_width=True)
-        
         st.markdown("---")
-        
-        # Scenario Analysis
-        st.subheader("🌦️ Weather Scenario Analysis")
-        
-        # Scenario comparison chart
+        st.subheader(" Weather Scenario Analysis")
         fig = make_subplots(
             rows=1, cols=2,
             subplot_titles=("Congestion Rate by Scenario", "Accident Rate by Scenario"),
             specs=[[{"type": "bar"}, {"type": "bar"}]]
         )
-        
         fig.add_trace(
             go.Bar(
                 y=scenario_analysis['Scenario'],
@@ -593,7 +370,6 @@ elif selected_page == "🎲 Monte Carlo Simulation":
             ),
             row=1, col=1
         )
-        
         fig.add_trace(
             go.Bar(
                 y=scenario_analysis['Scenario'],
@@ -604,14 +380,10 @@ elif selected_page == "🎲 Monte Carlo Simulation":
             ),
             row=1, col=2
         )
-        
         fig.update_xaxes(title_text="Rate (%)", row=1, col=1)
         fig.update_xaxes(title_text="Rate (%)", row=1, col=2)
         fig.update_layout(height=400, showlegend=False)
-        
         st.plotly_chart(fig, use_container_width=True)
-        
-        # Detailed scenario table
         st.markdown("#### Detailed Scenario Statistics")
         scenario_display = scenario_analysis.copy()
         scenario_display['Avg_Congestion_Prob'] = scenario_display['Avg_Congestion_Prob'].apply(lambda x: f"{x:.2%}")
@@ -619,17 +391,11 @@ elif selected_page == "🎲 Monte Carlo Simulation":
         scenario_display['Congestion_Rate'] = scenario_display['Congestion_Rate'].apply(lambda x: f"{x:.2%}")
         scenario_display['Accident_Rate'] = scenario_display['Accident_Rate'].apply(lambda x: f"{x:.2%}")
         scenario_display['Percentage'] = scenario_display['Percentage'].apply(lambda x: f"{x:.2f}%")
-        
         st.dataframe(scenario_display, use_container_width=True)
-        
         st.markdown("---")
-        
-        # Hourly Risk Heatmap
-        st.subheader("🕐 Hourly Risk Analysis by Area")
-        
+        st.subheader(" Hourly Risk Analysis by Area")
         hourly_area = sim_results.groupby(['area', 'hour'])['congestion_probability'].mean().reset_index()
         hourly_pivot = hourly_area.pivot(index='area', columns='hour', values='congestion_probability')
-        
         fig = px.imshow(
             hourly_pivot,
             labels=dict(x="Hour of Day", y="Area", color="Avg Congestion Probability"),
@@ -638,52 +404,25 @@ elif selected_page == "🎲 Monte Carlo Simulation":
         )
         fig.update_layout(height=500)
         st.plotly_chart(fig, use_container_width=True)
-
-# ----------------------------------------------------------------------------
-# FACTOR ANALYSIS PAGE
-# ----------------------------------------------------------------------------
-elif selected_page == "🔬 Factor Analysis":
-    st.header("🔬 Factor Analysis Results")
-    
+elif selected_page == " Factor Analysis":
+    st.header(" Factor Analysis Results")
     factor_loadings, factor_scores = load_factor_analysis()
-    
     if factor_loadings is not None and factor_scores is not None:
-        # Factor Overview
-        st.subheader("📊 Factor Analysis Overview")
-        
+        st.subheader(" Factor Analysis Overview")
         col1, col2, col3 = st.columns(3)
-        
         with col1:
             st.metric("Number of Factors", "3")
         with col2:
             st.metric("Variance Explained", "42.48%")
         with col3:
             st.metric("Features Analyzed", "8")
-        
         st.markdown("---")
-        
-        # Factor Interpretations
-        st.subheader("🔍 Factor Interpretations")
-        
+        st.subheader(" Factor Interpretations")
         tab1, tab2, tab3 = st.tabs(["Factor 1", "Factor 2", "Factor 3"])
-        
         with tab1:
             col1, col2 = st.columns([1, 2])
-            
             with col1:
-                st.markdown("""
-                ### Temperature-Traffic Speed Dimension
-                
-                **Key Loadings:**
-                - Temperature: **-0.547** (strong negative)
-                - Avg Speed: **+0.194**
-                - Wind Speed: **+0.132**
-                
-                **Interpretation:**
-                This factor captures the independent effect of temperature on traffic patterns. 
-                Cold conditions (negative loading) are associated with specific traffic behaviors.
-                """)
-            
+                st.markdown()
             with col2:
                 factor1_data = factor_loadings['Factor1'].sort_values(key=abs, ascending=False)
                 fig = go.Figure(go.Bar(
@@ -702,24 +441,10 @@ elif selected_page == "🔬 Factor Analysis":
                     height=400
                 )
                 st.plotly_chart(fig, use_container_width=True)
-        
         with tab2:
             col1, col2 = st.columns([1, 2])
-            
             with col1:
-                st.markdown("""
-                ### Traffic Flow Dynamics
-                
-                **Key Loadings:**
-                - Avg Speed: **+0.335**
-                - Visibility: **+0.243**
-                - Vehicle Count: **+0.176**
-                
-                **Interpretation:**
-                Represents optimal traffic flow conditions with good visibility and smooth movement. 
-                Higher scores indicate efficient traffic dynamics.
-                """)
-            
+                st.markdown()
             with col2:
                 factor2_data = factor_loadings['Factor2'].sort_values(key=abs, ascending=False)
                 fig = go.Figure(go.Bar(
@@ -738,25 +463,10 @@ elif selected_page == "🔬 Factor Analysis":
                     height=400
                 )
                 st.plotly_chart(fig, use_container_width=True)
-        
         with tab3:
             col1, col2 = st.columns([1, 2])
-            
             with col1:
-                st.markdown("""
-                ### Adverse Weather Conditions
-                
-                **Key Loadings:**
-                - Wind Speed: **+0.263**
-                - Rain: **+0.217**
-                - Humidity: **+0.161**
-                - Avg Speed: **-0.159** (negative)
-                
-                **Interpretation:**
-                Captures compound effect of multiple weather hazards. High scores indicate 
-                severe weather with reduced traffic speeds.
-                """)
-            
+                st.markdown()
             with col2:
                 factor3_data = factor_loadings['Factor3'].sort_values(key=abs, ascending=False)
                 fig = go.Figure(go.Bar(
@@ -775,12 +485,8 @@ elif selected_page == "🔬 Factor Analysis":
                     height=400
                 )
                 st.plotly_chart(fig, use_container_width=True)
-        
         st.markdown("---")
-        
-        # Factor Loadings Heatmap
-        st.subheader("🔥 Factor Loadings Heatmap")
-        
+        st.subheader(" Factor Loadings Heatmap")
         fig = px.imshow(
             factor_loadings.T,
             labels=dict(x="Features", y="Factors", color="Loading"),
@@ -790,14 +496,9 @@ elif selected_page == "🔬 Factor Analysis":
         )
         fig.update_layout(height=500)
         st.plotly_chart(fig, use_container_width=True)
-        
         st.markdown("---")
-        
-        # Factor Score Distributions
-        st.subheader("📊 Factor Score Distributions")
-        
+        st.subheader(" Factor Score Distributions")
         col1, col2, col3 = st.columns(3)
-        
         for idx, col in enumerate([col1, col2, col3]):
             with col:
                 factor_col = f'Factor{idx+1}'
@@ -809,182 +510,223 @@ elif selected_page == "🔬 Factor Analysis":
                     color_discrete_sequence=['#8b5cf6']
                 )
                 st.plotly_chart(fig, use_container_width=True)
-
-# ----------------------------------------------------------------------------
-# RECOMMENDATIONS PAGE
-# ----------------------------------------------------------------------------
-elif selected_page == "💡 Recommendations":
-    st.header("💡 Strategic Recommendations for Urban Traffic Management")
-    
-    st.markdown("""
-    Based on the comprehensive analysis of 10,000 Monte Carlo simulations and factor analysis 
-    of weather-traffic relationships, we provide the following actionable recommendations.
-    """)
-    
+elif selected_page == " Network Analysis":
+    st.header(" Urban Network Analysis")
+    network_metrics, edge_weights = load_network_analysis()
+    if network_metrics is not None and edge_weights is not None:
+        st.subheader(" Network Overview")
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            st.metric("Network Nodes", len(network_metrics))
+        with col2:
+            st.metric("Network Edges", len(edge_weights))
+        with col3:
+            st.metric("Communities", network_metrics['community'].nunique())
+        with col4:
+            avg_centrality = network_metrics['degree_centrality'].mean()
+            st.metric("Avg Centrality", f"{avg_centrality:.3f}")
+        st.markdown("---")
+        st.subheader(" Interactive Network Graph")
+        fig = go.Figure()
+        n_nodes = len(network_metrics)
+        angles = np.linspace(0, 2*np.pi, n_nodes, endpoint=False)
+        radius = 5
+        node_positions = {}
+        for i, row in network_metrics.iterrows():
+            x = radius * np.cos(angles[i])
+            y = radius * np.sin(angles[i])
+            node_positions[row['area']] = (x, y)
+        for _, edge in edge_weights.iterrows():
+            x0, y0 = node_positions[edge['area1']]
+            x1, y1 = node_positions[edge['area2']]
+            fig.add_trace(go.Scatter(
+                x=[x0, x1],
+                y=[y0, y1],
+                mode='lines',
+                line=dict(width=edge['weight']*3, color='lightgray'),
+                hoverinfo='skip',
+                showlegend=False
+            ))
+        node_x = []
+        node_y = []
+        node_text = []
+        node_size = []
+        node_color = []
+        for _, row in network_metrics.iterrows():
+            x, y = node_positions[row['area']]
+            node_x.append(x)
+            node_y.append(y)
+            hover_text = f"<b>{row['area']}</b><br>" + \
+                        f"PageRank: {row['pagerank']:.3f}<br>" + \
+                        f"Degree Centrality: {row['degree_centrality']:.3f}<br>" + \
+                        f"Betweenness: {row['betweenness_centrality']:.3f}<br>" + \
+                        f"Community: {row['community']}"
+            node_text.append(hover_text)
+            node_size.append(row['pagerank'] * 100 + 20)
+            node_color.append(row['community'])
+        fig.add_trace(go.Scatter(
+            x=node_x,
+            y=node_y,
+            mode='markers+text',
+            text=[row['area'] for _, row in network_metrics.iterrows()],
+            textposition='top center',
+            hovertext=node_text,
+            hoverinfo='text',
+            marker=dict(
+                size=node_size,
+                color=node_color,
+                colorscale='Viridis',
+                showscale=True,
+                colorbar=dict(title="Community"),
+                line=dict(width=2, color='white')
+            ),
+            showlegend=False
+        ))
+        fig.update_layout(
+            title="London Area Transportation Network",
+            showlegend=False,
+            hovermode='closest',
+            margin=dict(b=0, l=0, r=0, t=40),
+            xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+            yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+            height=600,
+            plot_bgcolor='rgba(0,0,0,0)'
+        )
+        st.plotly_chart(fig, use_container_width=True)
+        st.info(" **Graph Interpretation**: Node size represents PageRank influence. Colors indicate detected communities (areas with similar traffic/weather patterns). Edge thickness shows correlation strength.")
+        st.markdown("---")
+        st.subheader(" Centrality Metrics Comparison")
+        col1, col2 = st.columns(2)
+        with col1:
+            top_degree = network_metrics.nlargest(5, 'degree_centrality')
+            fig = go.Figure(go.Bar(
+                x=top_degree['degree_centrality'],
+                y=top_degree['area'],
+                orientation='h',
+                marker=dict(color='#3b82f6'),
+                text=top_degree['degree_centrality'].round(3),
+                textposition='auto'
+            ))
+            fig.update_layout(
+                title="Top 5 Areas by Degree Centrality",
+                xaxis_title="Degree Centrality",
+                height=300
+            )
+            st.plotly_chart(fig, use_container_width=True)
+            top_pagerank = network_metrics.nlargest(5, 'pagerank')
+            fig = go.Figure(go.Bar(
+                x=top_pagerank['pagerank'],
+                y=top_pagerank['area'],
+                orientation='h',
+                marker=dict(color='#10b981'),
+                text=top_pagerank['pagerank'].round(3),
+                textposition='auto'
+            ))
+            fig.update_layout(
+                title="Top 5 Areas by PageRank",
+                xaxis_title="PageRank Score",
+                height=300
+            )
+            st.plotly_chart(fig, use_container_width=True)
+        with col2:
+            top_betweenness = network_metrics.nlargest(5, 'betweenness_centrality')
+            fig = go.Figure(go.Bar(
+                x=top_betweenness['betweenness_centrality'],
+                y=top_betweenness['area'],
+                orientation='h',
+                marker=dict(color='#f59e0b'),
+                text=top_betweenness['betweenness_centrality'].round(3),
+                textposition='auto'
+            ))
+            fig.update_layout(
+                title="Top 5 Areas by Betweenness Centrality",
+                xaxis_title="Betweenness Centrality",
+                height=300
+            )
+            st.plotly_chart(fig, use_container_width=True)
+            top_closeness = network_metrics.nlargest(5, 'closeness_centrality')
+            fig = go.Figure(go.Bar(
+                x=top_closeness['closeness_centrality'],
+                y=top_closeness['area'],
+                orientation='h',
+                marker=dict(color='#ef4444'),
+                text=top_closeness['closeness_centrality'].round(3),
+                textposition='auto'
+            ))
+            fig.update_layout(
+                title="Top 5 Areas by Closeness Centrality",
+                xaxis_title="Closeness Centrality",
+                height=300
+            )
+            st.plotly_chart(fig, use_container_width=True)
+        st.markdown("---")
+        st.subheader(" Community Analysis")
+        community_stats = network_metrics.groupby('community').agg({
+            'area': 'count',
+            'avg_weather_severity': 'mean',
+            'avg_traffic_intensity': 'mean',
+            'total_accidents': 'sum',
+            'pagerank': 'mean'
+        }).reset_index()
+        community_stats.columns = ['Community', 'Num Areas', 'Avg Weather Severity', 
+                                   'Avg Traffic Intensity', 'Total Accidents', 'Avg PageRank']
+        st.dataframe(community_stats.style.format({
+            'Avg Weather Severity': '{:.2f}',
+            'Avg Traffic Intensity': '{:.2f}',
+            'Total Accidents': '{:.0f}',
+            'Avg PageRank': '{:.3f}'
+        }), use_container_width=True)
+        st.markdown("---")
+        st.subheader(" Detailed Network Metrics")
+        display_metrics = network_metrics[[
+            'area', 'degree', 'degree_centrality', 'betweenness_centrality',
+            'closeness_centrality', 'pagerank', 'clustering_coefficient', 'community'
+        ]].sort_values('pagerank', ascending=False)
+        st.dataframe(display_metrics.style.format({
+            'degree_centrality': '{:.3f}',
+            'betweenness_centrality': '{:.3f}',
+            'closeness_centrality': '{:.3f}',
+            'pagerank': '{:.3f}',
+            'clustering_coefficient': '{:.3f}'
+        }), use_container_width=True)
+        st.markdown("---")
+        st.subheader(" Network Insights")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown()
+        with col2:
+            st.markdown()
+elif selected_page == " Recommendations":
+    st.header(" Strategic Recommendations for Urban Traffic Management")
+    st.markdown()
     st.markdown("---")
-    
-    # Immediate Actions
-    st.subheader("🚨 Immediate Operational Actions")
-    
+    st.subheader(" Immediate Operational Actions")
     col1, col2 = st.columns(2)
-    
     with col1:
-        st.markdown("""
-        #### 1. Dynamic Speed Limits
-        **Implementation:** Weather-responsive variable speed limits
-        
-        - Automatic activation when wind speeds exceed 50 km/h
-        - Progressive reduction: 10-20 km/h below normal limits
-        - **Expected outcome:** 15-25% reduction in congestion probability
-        
-        **Priority:** 🔴 High - Strong winds show 72% congestion risk
-        """)
-        
-        st.markdown("""
-        #### 2. Enhanced Real-Time Monitoring
-        **Implementation:** Integrated weather-traffic monitoring
-        
-        - Deploy additional sensors in Chelsea, Hackney, Camden
-        - Alert threshold: congestion probability > 70%
-        - Integrate meteorological data with traffic systems
-        
-        **Priority:** 🔴 High - Real-time data critical for decision-making
-        """)
-        
-        st.markdown("""
-        #### 3. Public Communication System
-        **Implementation:** Pre-emptive warnings and advisories
-        
-        - Mobile apps and digital signage
-        - Scenario-specific travel advisories
-        - Alternative route suggestions during high-risk periods
-        
-        **Priority:** 🟡 Medium - Supports driver decision-making
-        """)
-    
+        st.markdown()
+        st.markdown()
+        st.markdown()
     with col2:
-        st.markdown("""
-        #### 4. Wind-Resistant Infrastructure
-        **Implementation:** Physical barriers and protection
-        
-        - Install windbreak barriers in exposed sections
-        - Prioritize Chelsea and Westminster corridors
-        - **Expected benefit:** 10-15% reduction in wind-related incidents
-        
-        **Priority:** 🟢 Long-term - Infrastructure investment
-        """)
-        
-        st.markdown("""
-        #### 5. Drainage System Enhancement
-        **Implementation:** Improved water management
-        
-        - Upgrade drainage in heavy rain zones (55% occurrence)
-        - Target areas with rain-related congestion
-        - Reduce surface water and visibility issues
-        
-        **Priority:** 🟡 Medium - Seasonal importance
-        """)
-        
-        st.markdown("""
-        #### 6. Adaptive Traffic Signals
-        **Implementation:** Weather-responsive timing
-        
-        - Extended green phases during adverse conditions
-        - Cross-district coordination
-        - Flow optimization based on Factor 2 scores
-        
-        **Priority:** 🟡 Medium - Technology upgrade
-        """)
-    
+        st.markdown()
+        st.markdown()
+        st.markdown()
     st.markdown("---")
-    
-    # Policy Recommendations
-    st.subheader("📋 Policy Recommendations")
-    
-    st.markdown("""
-    ### 1. Flexible Work Arrangements
-    **Target:** Reduce peak hour congestion during extreme weather
-    
-    - Encourage remote work during adverse weather forecasts
-    - Implement staggered start times (7-10 AM window)
-    - **Potential impact:** 20-30% reduction in vehicle count during critical periods
-    
-    **Supporting Data:** Evening peak (5-7 PM) shows 79% congestion in Camden
-    """)
-    
-    st.markdown("""
-    ### 2. Public Transportation Enhancement
-    **Target:** Modal shift during high-risk conditions
-    
-    - Increased service frequency during adverse weather
-    - Weather-protected waiting areas at key hubs
-    - Incentive programs for modal shift on high-risk days
-    
-    **Supporting Data:** Factor 2 analysis shows traffic flow optimization potential
-    """)
-    
-    st.markdown("""
-    ### 3. Emergency Response Protocols
-    **Target:** Rapid incident management
-    
-    - Pre-positioned response teams during high-probability events
-    - Coordinated inter-agency communication
-    - Rapid clearance procedures for secondary congestion
-    
-    **Supporting Data:** 28.75% accident probability under adverse weather (5.75x increase)
-    """)
-    
+    st.subheader(" Policy Recommendations")
+    st.markdown()
+    st.markdown()
+    st.markdown()
     st.markdown("---")
-    
-    # Factor-Based Monitoring
-    st.subheader("🔬 Factor-Based Monitoring System")
-    
-    st.markdown("""
-    ### Implement Three-Dimensional Monitoring
-    
-    Based on factor analysis results, deploy a simplified monitoring system:
-    """)
-    
+    st.subheader(" Factor-Based Monitoring System")
+    st.markdown()
     col1, col2, col3 = st.columns(3)
-    
     with col1:
-        st.markdown("""
-        **Factor 1 Monitor**
-        
-        🌡️ Temperature-Speed Dimension
-        
-        - Track: Temperature, Speed
-        - Alert: Extreme temp + speed drop
-        - Action: Temperature-specific protocols
-        """)
-    
+        st.markdown()
     with col2:
-        st.markdown("""
-        **Factor 2 Monitor**
-        
-        🚗 Traffic Flow Quality
-        
-        - Track: Speed, Visibility, Density
-        - Alert: Flow degradation
-        - Action: Signal timing adjustment
-        """)
-    
+        st.markdown()
     with col3:
-        st.markdown("""
-        **Factor 3 Monitor**
-        
-        🌧️ Weather Severity
-        
-        - Track: Wind, Rain, Humidity
-        - Alert: Compound weather events
-        - Action: Unified weather response
-        """)
-    
+        st.markdown()
     st.markdown("---")
-    
-    # Implementation Roadmap
-    st.subheader("🗓️ Implementation Roadmap")
-    
+    st.subheader(" Implementation Roadmap")
     roadmap_data = pd.DataFrame({
         'Phase': ['Phase 1 (Months 1-3)', 'Phase 2 (Months 4-6)', 'Phase 3 (Months 7-12)', 'Phase 4 (Year 2+)'],
         'Actions': [
@@ -994,18 +736,12 @@ elif selected_page == "💡 Recommendations":
             'Evaluate outcomes • Scale successful programs • Long-term infrastructure improvements'
         ],
         'Budget': ['£2-3M', '£5-7M', '£8-12M', '£15-20M'],
-        'Priority': ['🔴 High', '🟡 Medium', '🟡 Medium', '🟢 Long-term']
+        'Priority': [' High', ' Medium', ' Medium', ' Long-term']
     })
-    
     st.dataframe(roadmap_data, use_container_width=True)
-    
     st.markdown("---")
-    
-    # Expected Outcomes
-    st.subheader("📊 Expected Outcomes")
-    
+    st.subheader(" Expected Outcomes")
     col1, col2 = st.columns(2)
-    
     with col1:
         outcomes_data = pd.DataFrame({
             'Metric': ['Congestion Probability', 'Accident Risk', 'Average Speed', 'Public Satisfaction'],
@@ -1014,72 +750,11 @@ elif selected_page == "💡 Recommendations":
             'Target (Year 2)': ['45-50%', '18-20%', '55-60 km/h', '85%']
         })
         st.dataframe(outcomes_data, use_container_width=True)
-    
     with col2:
-        st.markdown("""
-        ### Success Indicators
-        
-        ✅ **Reduced congestion** during adverse weather
-        
-        ✅ **Lower accident rates** in high-risk areas
-        
-        ✅ **Improved traffic flow** during peak hours
-        
-        ✅ **Increased public awareness** of weather impacts
-        
-        ✅ **Better resource allocation** based on predictions
-        
-        ✅ **Enhanced inter-agency coordination**
-        """)
-    
+        st.markdown()
     st.markdown("---")
-    
-    # Key Takeaways
-    st.subheader("🎯 Key Takeaways")
-    
-    st.success("""
-    **Main Findings:**
-    
-    1. **Strong winds** are the #1 congestion risk factor (72.89% probability) - 2.4x baseline
-    
-    2. **Heavy rain** affects majority of cases (55.36% of simulations)
-    
-    3. **Combined weather effects** occur in 64.8% of scenarios - compound risk
-    
-    4. **Temperature** has independent effect on traffic (Factor 1: -0.547 loading)
-    
-    5. **Chelsea, Hackney, Camden** show consistently high vulnerability
-    
-    6. **Evening rush (5-7 PM)** demonstrates maximum congestion risk
-    
-    7. **Factor-based monitoring** reduces complexity from 8 variables to 3 dimensions
-    
-    8. **Accident risk** increases 5.75x under adverse weather (from 5% to 28.75%)
-    """)
-    
-    st.info("""
-    **Recommendation Priority:**
-    
-    🔴 **Immediate (0-3 months):** Dynamic speed limits, enhanced monitoring, public communication
-    
-    🟡 **Short-term (3-12 months):** Adaptive signals, drainage upgrades, emergency protocols
-    
-    🟢 **Long-term (1-2 years):** Infrastructure improvements, comprehensive policy implementation
-    """)
-
-# ============================================================================
-# FOOTER
-# ============================================================================
+    st.subheader(" Key Takeaways")
+    st.success()
+    st.info()
 st.markdown("---")
-st.markdown("""
-    <div style='text-align: center; color: #6b7280; padding: 2rem;'>
-        <p><strong>Weather Impact on Urban Traffic Analysis</strong></p>
-        <p>Big Data Final Project - Fourth Year Computer Science</p>
-        <p>FCDS - Faculty of Computer and Data Science, Semester 7</p>
-        <p>December 2024</p>
-        <br>
-        <p style='font-size: 0.9rem;'>
-            Team Members: 6 | Simulations: 10,000 | Factors: 3 | Records Processed: 5,000+
-        </p>
-    </div>
-""", unsafe_allow_html=True)
+st.markdown(, unsafe_allow_html=True)

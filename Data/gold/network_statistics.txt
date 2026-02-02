@@ -1,0 +1,18 @@
+======================================================================
+URBAN NETWORK STATISTICS
+======================================================================
+
+num_nodes: 8
+num_edges: 9
+density: 0.3214
+num_components: 2
+is_connected: False
+diameter: 3
+radius: 2
+average_shortest_path: 1.4434
+average_clustering: 0.1466
+transitivity: 0.2000
+modularity: 0.2150
+avg_degree: 2.2500
+max_degree: 3
+min_degree: 0

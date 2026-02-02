@@ -1,4 +1,4 @@
-=== MEMBER 4 – Merge + Feature Engineering Report ===
+=== MEMBER 4 â€“ Merge + Feature Engineering Report ===
 
 Weather rows: 4794
 Traffic rows: 4813

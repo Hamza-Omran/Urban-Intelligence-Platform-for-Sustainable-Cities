@@ -1,0 +1,10 @@
+area1,area2,weight,traffic_correlation,weather_correlation,observations
+Camden,Hammersmith,1.0,0.999,1.0,3
+Camden,Hackney,0.926,0.877,1.0,3
+Chelsea,Westminster,0.995,0.991,1.0,4
+Camden,Chelsea,0.684,0.473,1.0,4
+Chelsea,Hackney,0.549,0.249,1.0,4
+Hammersmith,Westminster,0.816,0.693,1.0,4
+Hammersmith,Islington,0.806,0.676,1.0,3
+Islington,Southwark,0.589,0.315,1.0,5
+Southwark,Westminster,0.815,0.692,1.0,5
