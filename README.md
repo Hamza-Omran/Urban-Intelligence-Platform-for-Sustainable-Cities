@@ -255,28 +255,6 @@ Top-K Benefits:
 
 Similar strategies used in protein interaction networks, social network analysis, and recommendation systems.
 
-## References
-
-This project demonstrates transferable skills from:
-- Network Analysis: Protein-Interaction-Network-Analysis (transferable network science skills)
-- Ranking Algorithms: PageRank-Algorithm-Implementation (influence modeling)
-- Data Analytics: supermarket-sales-analysis (business intelligence)
-
-## Team
-
-Big Data Analytics Project - Fourth Year Computer Science
-
-Member 1: Infrastructure and Data Generation
-Member 2: Data Cleaning and Validation
-Member 3: HDFS Integration and Storage
-Member 4: Data Merging and Feature Engineering
-Member 5: Monte Carlo Simulation
-Member 6: Factor Analysis
-Team: Network Analysis and Dashboard Enhancement
-
-## License
-
-MIT License
 
 ## Contact
 
